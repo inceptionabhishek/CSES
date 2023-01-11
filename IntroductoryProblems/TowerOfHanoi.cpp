@@ -18,17 +18,19 @@ const double PI = 3.14159265358979323846;
 #endif
 #define SIZE 100000 + 1
 
-
+void toh(int n,int from,int to,int aux){
+	if(n==0){
+		return;
+	}
+	toh(n-1,from,aux,to);
+	cout << from << " " << to << endl;
+	toh(n-1,aux,to,from);
+}
 void solve() {
 	int n;
 	cin >> n;
-	for(int i=0;i< (1<<n);i++){
-		int val=(i^(i>>1));
-		bitset <32> r(val);
-		cout << r << endl;
-		string s=r.to_string();
-		cout << s.substr(32-n) << endl;
-	}
+	cout << pow(2,n)-1  << endl;
+	toh(n,1,3,2);
 }
 
  

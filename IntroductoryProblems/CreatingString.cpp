@@ -17,17 +17,27 @@ const double PI = 3.14159265358979323846;
 #define deb(...)
 #endif
 #define SIZE 100000 + 1
-
+set<string>ans;
+void permutataion(string &s,int l,int r){
+	if(l==r){
+		ans.insert(s);
+	}
+	else{
+		for(int i=l;i<=r;i++){
+			swap(s[i],s[l]);
+			permutataion(s,l+1,r);
+			swap(s[i],s[l]);
+		}
+	}
+}
 
 void solve() {
-	int n;
-	cin >> n;
-	for(int i=0;i< (1<<n);i++){
-		int val=(i^(i>>1));
-		bitset <32> r(val);
-		cout << r << endl;
-		string s=r.to_string();
-		cout << s.substr(32-n) << endl;
+	string s;
+	cin >> s;
+	permutataion(s,0,s.length()-1);
+	cout << ans.size() << endl;
+	for(auto j:ans){
+		cout << j << endl;
 	}
 }
 

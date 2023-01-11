@@ -19,16 +19,25 @@ const double PI = 3.14159265358979323846;
 #define SIZE 100000 + 1
 
 
-void solve() {
-	int n;
-	cin >> n;
-	for(int i=0;i< (1<<n);i++){
-		int val=(i^(i>>1));
-		bitset <32> r(val);
-		cout << r << endl;
-		string s=r.to_string();
-		cout << s.substr(32-n) << endl;
+
+ll ans(ll n,ll i,ll a[],ll cur, ll tot){
+	if(i>=n){
+		return abs(tot-cur);
 	}
+	ll take=ans(n,i+1,a,cur+a[i],tot-a[i]);
+	ll nottake=ans(n,i+1,a,cur,tot);
+	return min(take,nottake);
+}
+void solve() {
+	ll n;
+	cin >> n;
+	ll a[n];
+	ll tot=0;
+	fo(i,n){
+		cin >> a[i];
+		tot+=a[i];
+	}
+	cout << ans(n,0,a,0,tot) << endl;
 }
 
  
